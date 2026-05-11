@@ -1,20 +1,69 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import CadastroScreen from "./screens/CadastroScreen";
+import AssistenteScreen from "./screens/AssistenteScreen";
+import DespesasScreen from "./screens/DespesasScreen";
+import InvestimentosScreen from "./screens/InvestimentosScreen";
+import ProScreen from "./screens/ProScreen";
+import MovimentacaoScreen from "./screens/MovimentacaoScreen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+    <NavigationContainer>
+
+      <Stack.Navigator initialRouteName="Home">
+
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+        />
+
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+        />
+
+        <Stack.Screen
+          name="Cadastro"
+          component={CadastroScreen}
+        />
+
+        <Stack.Screen
+          name="Assistente"
+          component={AssistenteScreen}
+        />
+
+        <Stack.Screen
+          name="Despesas"
+          component={DespesasScreen}
+        />
+
+        <Stack.Screen
+          name="Investimentos"
+          component={InvestimentosScreen}
+        />
+
+        <Stack.Screen
+          name="Pro"
+          component={ProScreen}
+        />
+
+        <Stack.Screen
+          name="Movimentação"
+          component={MovimentacaoScreen}
+        />
+
+      </Stack.Navigator>
+
+    </NavigationContainer>
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
