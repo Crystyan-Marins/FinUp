@@ -9,7 +9,10 @@ import {
   StatusBar,
 } from "react-native";
 
+import { LinearGradient } from "expo-linear-gradient";
+
 import LoadingScreen from "./LoadingScreen";
+
 
 export default function LoginScreen() {
 
@@ -17,9 +20,11 @@ export default function LoginScreen() {
 
   useEffect(() => {
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
+
+    return () => clearTimeout(timer);
 
   }, []);
 
@@ -30,12 +35,7 @@ export default function LoginScreen() {
   return (
 
     <View style={styles.container}>
-
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="#B14DFF"
-      />
-
+      
       {/* TOPO */}
       <View style={styles.topContainer}>
 
@@ -57,7 +57,11 @@ export default function LoginScreen() {
         {/* EMAIL */}
         <View style={styles.inputContainer}>
 
-          <Text style={styles.icon}>✉</Text>
+          <Image
+            source={require("../assets/email.png")}
+            style={styles.email}
+            resizeMode="contain"
+          />
 
           <TextInput
             placeholder="Seu email"
@@ -70,7 +74,11 @@ export default function LoginScreen() {
         {/* SENHA */}
         <View style={styles.inputContainer}>
 
-          <Text style={styles.icon}>🔒</Text>
+          <Image
+            source={require("../assets/senha.png")}
+            style={styles.senha}
+            resizeMode="contain"
+          />
 
           <TextInput
             placeholder="Sua senha"
@@ -87,12 +95,21 @@ export default function LoginScreen() {
 
         </View>
 
-        {/* BOTÃO */}
-        <TouchableOpacity style={styles.loginButton}>
+        {/* BOTÃO LOGIN */}
+        <TouchableOpacity activeOpacity={0.8}>
 
-          <Text style={styles.loginText}>
-            Entrar
-          </Text>
+          <LinearGradient
+            colors={["#B156F9", "#0E9EEA"]}
+            start={{ x: 0.1, y: 0 }}
+            end={{ x: 1.9, y: 0 }}
+            style={styles.loginButton}
+          >
+
+            <Text style={styles.loginText}>
+              Entrar
+            </Text>
+
+          </LinearGradient>
 
         </TouchableOpacity>
 
@@ -112,11 +129,11 @@ export default function LoginScreen() {
         {/* GOOGLE */}
         <TouchableOpacity style={styles.googleButton}>
 
-          <Text style={styles.googleIcon}>G</Text>
-
-          <Text style={styles.googleText}>
-            Entrar com Google
-          </Text>
+          <Image
+            source={require("../assets/google.png")}
+            style={styles.googleImg}
+            resizeMode="contain"
+          />
 
         </TouchableOpacity>
 
@@ -161,7 +178,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     width: "200%",
     height: "520%",
-    marginBottom: 0,
   },
 
   card: {
@@ -216,13 +232,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 5,
 
-    backgroundColor: "#7B2CFF",
+    shadowColor: "#B156F9",
 
-    shadowColor: "#7B2CFF",
     shadowOffset: {
       width: 0,
       height: 6,
     },
+
     shadowOpacity: 0.35,
     shadowRadius: 8,
 
@@ -231,14 +247,14 @@ const styles = StyleSheet.create({
 
   loginText: {
     color: "#FFF",
-    fontSize: 30,
+    fontSize: 22,
     fontWeight: "bold",
   },
 
   dividerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 15,
+    marginVertical: 20,
   },
 
   line: {
@@ -248,7 +264,7 @@ const styles = StyleSheet.create({
   },
 
   or: {
-    marginHorizontal: 1,
+    marginHorizontal: 12,
     fontSize: 18,
     color: "#6B5D7A",
     fontWeight: "600",
@@ -258,34 +274,27 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: "#FFF",
     borderRadius: 18,
-    flexDirection: "row",
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
 
     shadowColor: "#000",
+
     shadowOffset: {
       width: 0,
       height: 2,
     },
+
     shadowOpacity: 0.08,
     shadowRadius: 4,
 
     elevation: 4,
   },
 
-  googleIcon: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#EA4335",
-    marginRight: 10,
+  googleImg: {
+    width: 800,
+    height: 200,
+    marginTop: 15,
   },
-
-  googleText: {
-    fontSize: 22,
-    fontWeight: "600",
-    color: "#1F1F1F",
-  },
-
   footer: {
     marginTop: 30,
     alignItems: "center",
@@ -302,5 +311,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#5A00FF",
   },
+
+  email: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
+  },
+
+    senha: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
+  }
 
 });

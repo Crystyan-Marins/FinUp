@@ -9,6 +9,8 @@ import {
   Image,
 } from "react-native";
 
+import { LinearGradient } from "expo-linear-gradient";
+
 import LoadingScreen from "./LoadingScreen";
 
 export default function CadastroScreen() {
@@ -17,9 +19,11 @@ export default function CadastroScreen() {
 
   useEffect(() => {
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
+
+    return () => clearTimeout(timer);
 
   }, []);
 
@@ -44,6 +48,7 @@ export default function CadastroScreen() {
           style={styles.logo}
           resizeMode="contain"
         />
+
       </View>
 
       {/* CARD */}
@@ -60,7 +65,11 @@ export default function CadastroScreen() {
         {/* NOME */}
         <View style={styles.inputContainer}>
 
-          <Text style={styles.icon}>👤</Text>
+          <Image
+            source={require("../assets/usuario.png")}
+            style={styles.iconImg}
+            resizeMode="contain"
+          />
 
           <TextInput
             placeholder="Seu nome"
@@ -73,7 +82,11 @@ export default function CadastroScreen() {
         {/* EMAIL */}
         <View style={styles.inputContainer}>
 
-          <Text style={styles.icon}>✉</Text>
+          <Image
+            source={require("../assets/email.png")}
+            style={styles.iconImg}
+            resizeMode="contain"
+          />
 
           <TextInput
             placeholder="Seu email"
@@ -86,7 +99,11 @@ export default function CadastroScreen() {
         {/* SENHA */}
         <View style={styles.inputContainer}>
 
-          <Text style={styles.icon}>🔒</Text>
+          <Image
+            source={require("../assets/senha.png")}
+            style={styles.iconImg}
+            resizeMode="contain"
+          />
 
           <TextInput
             placeholder="Crie uma senha"
@@ -104,7 +121,11 @@ export default function CadastroScreen() {
         {/* CONFIRMAR SENHA */}
         <View style={styles.inputContainer}>
 
-          <Text style={styles.icon}>🔒</Text>
+          <Image
+            source={require("../assets/senha.png")}
+            style={styles.iconImg}
+            resizeMode="contain"
+          />
 
           <TextInput
             placeholder="Confirme a senha"
@@ -116,11 +137,20 @@ export default function CadastroScreen() {
         </View>
 
         {/* BOTÃO */}
-        <TouchableOpacity style={styles.registerButton}>
+        <TouchableOpacity activeOpacity={0.8}>
 
-          <Text style={styles.registerText}>
-            Cadastrar
-          </Text>
+          <LinearGradient
+            colors={["#B156F9", "#0E9EEA"]}
+            start={{ x: 0.1, y: 0 }}
+            end={{ x: 1.9, y: 0 }}
+            style={styles.registerButton}
+          >
+
+            <Text style={styles.registerText}>
+              Cadastrar
+            </Text>
+
+          </LinearGradient>
 
         </TouchableOpacity>
 
@@ -156,21 +186,19 @@ const styles = StyleSheet.create({
   },
 
   topContainer: {
-    flex: 0.32,
+    flex: 0.28,
     justifyContent: "center",
     alignItems: "center",
     paddingTop: 20,
   },
 
   logo: {
-    marginTop: 0,
     width: "170%",
     height: "520%",
-    marginBottom: 0,
   },
 
   card: {
-    flex: 0.80,
+    flex: 0.72,
     backgroundColor: "#F6F1FB",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
@@ -207,10 +235,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  icon: {
-    fontSize: 15,
-    marginRight: 12,
-    color: "#8B4DFF",
+  iconImg: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
   },
 
   input: {
@@ -221,7 +249,7 @@ const styles = StyleSheet.create({
 
   passwordInfo: {
     color: "#7D6C97",
-    marginTop: -10,
+    marginTop: -5,
     marginBottom: 10,
     marginLeft: 5,
     fontSize: 14,
@@ -236,13 +264,13 @@ const styles = StyleSheet.create({
 
     marginTop: 10,
 
-    backgroundColor: "#7B2CFF",
-
     shadowColor: "#7B2CFF",
+
     shadowOffset: {
       width: 0,
       height: 6,
     },
+
     shadowOpacity: 0.35,
     shadowRadius: 8,
 
